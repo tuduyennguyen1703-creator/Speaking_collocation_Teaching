@@ -1,8 +1,8 @@
-Speaking_Nguyễn Duyên
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Luyện 100 Từ Vựng IELTS - Red Edition Pro</title>
     <style>
         :root {
@@ -26,6 +26,8 @@ Speaking_Nguyễn Duyên
             min-height: 100vh;
             margin: 0;
             color: var(--text-color);
+            padding: 10px; /* Thêm padding cho body trên mobile */
+            box-sizing: border-box;
         }
 
         .container {
@@ -33,11 +35,12 @@ Speaking_Nguyễn Duyên
             padding: 30px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(211, 47, 47, 0.15);
-            width: 90%;
+            width: 100%;
             max-width: 500px;
             text-align: center;
             border-top: 5px solid var(--primary-color);
             position: relative;
+            box-sizing: border-box;
         }
 
         /* Header & Progress */
@@ -50,13 +53,13 @@ Speaking_Nguyễn Duyên
 
         .header-controls {
             display: flex;
-            gap: 10px;
+            gap: 15px; /* Tăng khoảng cách nút trên mobile */
         }
 
         .btn-icon {
             background: none;
             border: none;
-            font-size: 22px;
+            font-size: 24px; /* Icon to hơn */
             cursor: pointer;
             color: var(--primary-color);
             padding: 5px;
@@ -73,7 +76,7 @@ Speaking_Nguyễn Duyên
 
         /* Card Area */
         .card {
-            min-height: 300px;
+            min-height: 280px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -87,6 +90,7 @@ Speaking_Nguyễn Duyên
             margin-bottom: 20px;
             color: #2c3e50;
             line-height: 1.4;
+            word-wrap: break-word; /* Tránh tràn chữ */
         }
 
         .hidden-content {
@@ -106,11 +110,12 @@ Speaking_Nguyễn Duyên
         }
 
         .english-word {
-            font-size: 30px;
+            font-size: 32px;
             color: var(--primary-color);
             font-weight: 800;
             text-shadow: 1px 1px 0px rgba(0,0,0,0.05);
             margin: 0;
+            word-break: break-word; /* Xử lý từ dài trên mobile */
         }
 
         /* Nút nghe lại âm thanh */
@@ -118,16 +123,17 @@ Speaking_Nguyễn Duyên
             background: white;
             border: 2px solid var(--primary-color);
             color: var(--primary-color);
-            width: 36px;
-            height: 36px;
+            width: 40px; /* To hơn chút để dễ bấm */
+            height: 40px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.2s;
             flex-shrink: 0;
+            -webkit-tap-highlight-color: transparent; /* Bỏ highlight xanh trên mobile */
         }
         .btn-audio-replay:hover {
             background: var(--primary-color);
@@ -148,7 +154,7 @@ Speaking_Nguyễn Duyên
         }
 
         .example-box {
-            font-size: 15px;
+            font-size: 16px;
             color: #4b5563;
             margin-top: 15px;
             padding: 15px;
@@ -163,7 +169,7 @@ Speaking_Nguyễn Duyên
         /* Buttons */
         .btn {
             border: none;
-            padding: 12px 20px;
+            padding: 14px 20px; /* Padding dày hơn cho cảm ứng */
             font-size: 16px;
             font-weight: 600;
             border-radius: 50px;
@@ -171,6 +177,7 @@ Speaking_Nguyễn Duyên
             transition: transform 0.2s, box-shadow 0.2s;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             color: white;
+            -webkit-tap-highlight-color: transparent;
         }
         
         .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
@@ -188,18 +195,18 @@ Speaking_Nguyễn Duyên
         .nav-row {
             display: flex;
             justify-content: space-between;
-            margin-top: 20px;
-            gap: 10px;
+            margin-top: 25px;
+            gap: 15px;
         }
 
         .btn-nav {
             background-color: white;
             color: var(--primary-color);
             border: 2px solid var(--primary-color);
-            width: 50px;
-            height: 50px;
+            width: 55px; /* Nút điều hướng to hơn */
+            height: 55px;
             border-radius: 50%;
-            font-size: 20px;
+            font-size: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -242,21 +249,23 @@ Speaking_Nguyễn Duyên
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
             z-index: 100;
             justify-content: center;
             align-items: center;
+            backdrop-filter: blur(2px); /* Hiệu ứng mờ nền */
         }
 
         .modal-content {
             background: white;
             width: 90%;
             max-width: 400px;
-            max-height: 80vh;
+            max-height: 85vh; /* Tăng chiều cao tối đa */
             border-radius: 15px;
             padding: 20px;
             display: flex;
             flex-direction: column;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
         }
 
         .modal-header {
@@ -272,15 +281,17 @@ Speaking_Nguyễn Duyên
         .list-container {
             overflow-y: auto;
             flex: 1;
+            -webkit-overflow-scrolling: touch; /* Cuộn mượt trên iOS */
         }
 
         .list-item {
             display: flex;
             justify-content: space-between;
-            padding: 10px;
+            padding: 12px 10px; /* Tăng vùng chạm */
             border-bottom: 1px solid #f5f5f5;
             cursor: pointer;
             text-align: left;
+            align-items: center;
         }
         .list-item:hover { background-color: #fce4ec; }
         .list-item.active { background-color: #ffcdd2; font-weight: bold; }
@@ -296,6 +307,7 @@ Speaking_Nguyễn Duyên
             padding: 10px;
             border-radius: 10px;
             width: 30%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
         .stat-val { font-size: 20px; font-weight: bold; display: block; }
         .stat-label { font-size: 12px; }
@@ -309,15 +321,54 @@ Speaking_Nguyễn Duyên
             margin-top: 10px;
             flex: 1;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
         .recommend-item {
-            padding: 8px;
+            padding: 12px 8px;
             border-bottom: 1px solid #eee;
             cursor: pointer;
             color: var(--warning-color);
             font-weight: 500;
         }
         .recommend-item:hover { background: #fff3e0; }
+
+        /* --- RESPONSIVE MOBILE CONFIGURATION --- */
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px; /* Giảm padding container */
+            }
+            
+            .vietnamese-text {
+                font-size: 20px; /* Giảm cỡ chữ câu hỏi */
+            }
+
+            .english-word {
+                font-size: 26px; /* Giảm cỡ chữ đáp án */
+            }
+
+            .card {
+                min-height: 240px; /* Giảm chiều cao thẻ */
+            }
+
+            .btn {
+                font-size: 15px;
+                padding: 12px;
+            }
+
+            .btn-nav {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+            
+            .header-controls {
+                gap: 10px;
+            }
+            
+            .btn-icon {
+                font-size: 22px;
+            }
+        }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -563,37 +614,39 @@ Speaking_Nguyễn Duyên
         recommendList: document.getElementById('recommend-list')
     };
 
-    // --- SETUP AUDIO ---
-    window.speechSynthesis.onvoiceschanged = () => {
+    // --- SETUP AUDIO (HỆ THỐNG ONLY) ---
+    // Xóa bỏ hoàn toàn Google TTS để tránh lỗi
+    function loadVoices() {
         availableVoices = window.speechSynthesis.getVoices();
-    };
+    }
+    
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = loadVoices;
+    }
+    loadVoices(); // Gọi ngay lần đầu
 
     function playAudio(text) {
-        // Ưu tiên Google TTS
-        const audioUrl = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en-GB&q=${encodeURIComponent(text)}`;
-        const audio = new Audio(audioUrl);
-        const playPromise = audio.play();
-
-        if (playPromise !== undefined) {
-            playPromise.catch(error => {
-                console.log("Fallback to system audio");
-                speakSystem(text);
-            });
-        }
+        // Chỉ sử dụng giọng hệ thống - Ổn định nhất
+        speakSystem(text);
     }
 
     function speakSystem(text) {
+        // Hủy các lệnh đọc cũ để tránh chồng chéo
         window.speechSynthesis.cancel();
+        
         const utterance = new SpeechSynthesisUtterance(text);
         
-        const britishVoice = availableVoices.find(voice => 
-            voice.lang.includes('en-GB') || voice.name.includes('UK')
-        );
+        // Cố gắng tìm giọng Anh-Anh hoặc Anh-Mỹ chất lượng cao
+        const preferredVoice = availableVoices.find(voice => 
+            (voice.lang === 'en-GB' || voice.lang === 'en_GB') && 
+            (voice.name.includes('Google') || voice.name.includes('Premium') || voice.name.includes('Samantha'))
+        ) || availableVoices.find(voice => voice.lang.includes('en'));
 
-        if (britishVoice) utterance.voice = britishVoice;
-        utterance.rate = 0.8; 
+        if (preferredVoice) utterance.voice = preferredVoice;
+        
+        utterance.rate = 0.8; // Tốc độ vừa phải
         utterance.pitch = 1.0;
-        utterance.lang = 'en-GB';
+        utterance.volume = 1.0;
 
         window.speechSynthesis.speak(utterance);
     }
@@ -654,7 +707,10 @@ Speaking_Nguyễn Duyên
         isRevealed = true;
         elements.btnReveal.disabled = true;
         elements.answerArea.style.display = 'block';
+        
+        // Tự động đọc khi mở đáp án
         playAudio(vocabularyList[currentIndex].en);
+        
         elements.btnReveal.style.display = 'none'; 
         elements.reviewActions.style.display = 'flex'; 
     }
@@ -695,7 +751,10 @@ Speaking_Nguyễn Duyên
             if (item.status === 'learning') statusIcon = '🔸';
 
             div.innerHTML = `
-                <div><span style="margin-right:8px;">${statusIcon}</span><strong>${item.en}</strong></div>
+                <div style="display:flex; align-items:center;">
+                    <span style="margin-right:8px; font-size: 12px;">${statusIcon}</span>
+                    <strong>${item.en}</strong>
+                </div>
                 <div style="font-size:12px; color:#666;">${index + 1}</div>
             `;
             div.onclick = () => {
