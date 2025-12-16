@@ -614,54 +614,51 @@
         recommendList: document.getElementById('recommend-list')
     };
 
-    // --- SETUP AUDIO (GOOGLE ƯU TIÊN + FALLBACK HỆ THỐNG) ---
+    // === SETUP AUDIO (HỆ THỐNG - ROBUST) ===
     function loadVoices() {
         availableVoices = window.speechSynthesis.getVoices();
     }
     
+    // Đảm bảo load giọng khi trình duyệt sẵn sàng
     if (speechSynthesis.onvoiceschanged !== undefined) {
         speechSynthesis.onvoiceschanged = loadVoices;
     }
     loadVoices(); // Gọi ngay lần đầu
 
     function playAudio(text) {
-        // Cách 1: Dùng link Google Translate (Giọng Google chuẩn mọi máy)
-        // Lưu ý: client=tw-ob là endpoint public không chính thức nhưng ổn định nhất hiện tại cho web client đơn giản
-        const audioUrl = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q=${encodeURIComponent(text)}`;
-        const audio = new Audio(audioUrl);
-        
-        // Chỉnh tốc độ chậm (0.8 là vừa phải, 1.0 là bình thường)
-        audio.playbackRate = 0.8; 
-        
-        const playPromise = audio.play();
-
-        if (playPromise !== undefined) {
-            playPromise.catch(error => {
-                console.log("Google TTS blocked/failed, switching to System Audio");
-                // Nếu lỗi (do mạng hoặc chặn), chuyển sang giọng hệ thống
-                speakSystem(text);
-            });
-        }
-    }
-
-    function speakSystem(text) {
-        // Hủy các lệnh đọc cũ để tránh chồng chéo
+        // Hủy âm thanh đang đọc (nếu có) để tránh chồng chéo
         window.speechSynthesis.cancel();
-        
+
         const utterance = new SpeechSynthesisUtterance(text);
         
-        // Cố gắng tìm giọng Anh-Anh hoặc Anh-Mỹ chất lượng cao
-        const preferredVoice = availableVoices.find(voice => 
-            (voice.lang === 'en-GB' || voice.lang === 'en_GB') && 
-            (voice.name.includes('Google') || voice.name.includes('Premium') || voice.name.includes('Samantha'))
-        ) || availableVoices.find(voice => voice.lang.includes('en'));
+        // --- CHIẾN THUẬT CHỌN GIỌNG ---
+        // 1. Ưu tiên tìm giọng Google (thường có trên Android/Chrome)
+        let preferredVoice = availableVoices.find(voice => 
+            voice.name.includes('Google US English') || 
+            voice.name.includes('Google UK English Female')
+        );
+
+        // 2. Nếu không có, tìm giọng Anh-Anh (GB/UK)
+        if (!preferredVoice) {
+            preferredVoice = availableVoices.find(voice => 
+                voice.lang === 'en-GB' || voice.lang === 'en_GB'
+            );
+        }
+
+        // 3. Cuối cùng, lấy bất kỳ giọng tiếng Anh nào
+        if (!preferredVoice) {
+            preferredVoice = availableVoices.find(voice => voice.lang.includes('en'));
+        }
 
         if (preferredVoice) utterance.voice = preferredVoice;
         
-        // Tốc độ chậm cho fallback (0.7 thường tương đương 0.8 của audio file)
-        utterance.rate = 0.7; 
+        // Tốc độ 0.8 để nghe rõ và chậm rãi
+        utterance.rate = 0.8; 
         utterance.pitch = 1.0;
         utterance.volume = 1.0;
+
+        // Xử lý sự kiện lỗi hoặc kết thúc (để debug nếu cần)
+        utterance.onerror = (e) => console.log('Speech error:', e);
 
         window.speechSynthesis.speak(utterance);
     }
