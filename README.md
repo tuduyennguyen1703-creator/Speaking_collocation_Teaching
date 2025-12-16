@@ -614,8 +614,7 @@
         recommendList: document.getElementById('recommend-list')
     };
 
-    // --- SETUP AUDIO (HỆ THỐNG ONLY) ---
-    // Xóa bỏ hoàn toàn Google TTS để tránh lỗi
+    // --- SETUP AUDIO (GOOGLE ƯU TIÊN + FALLBACK HỆ THỐNG) ---
     function loadVoices() {
         availableVoices = window.speechSynthesis.getVoices();
     }
@@ -626,8 +625,23 @@
     loadVoices(); // Gọi ngay lần đầu
 
     function playAudio(text) {
-        // Chỉ sử dụng giọng hệ thống - Ổn định nhất
-        speakSystem(text);
+        // Cách 1: Dùng link Google Translate (Giọng Google chuẩn mọi máy)
+        // Lưu ý: client=tw-ob là endpoint public không chính thức nhưng ổn định nhất hiện tại cho web client đơn giản
+        const audioUrl = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q=${encodeURIComponent(text)}`;
+        const audio = new Audio(audioUrl);
+        
+        // Chỉnh tốc độ chậm (0.8 là vừa phải, 1.0 là bình thường)
+        audio.playbackRate = 0.8; 
+        
+        const playPromise = audio.play();
+
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.log("Google TTS blocked/failed, switching to System Audio");
+                // Nếu lỗi (do mạng hoặc chặn), chuyển sang giọng hệ thống
+                speakSystem(text);
+            });
+        }
     }
 
     function speakSystem(text) {
@@ -644,7 +658,8 @@
 
         if (preferredVoice) utterance.voice = preferredVoice;
         
-        utterance.rate = 0.8; // Tốc độ vừa phải
+        // Tốc độ chậm cho fallback (0.7 thường tương đương 0.8 của audio file)
+        utterance.rate = 0.7; 
         utterance.pitch = 1.0;
         utterance.volume = 1.0;
 
