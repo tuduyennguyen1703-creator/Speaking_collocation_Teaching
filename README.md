@@ -1,9 +1,9 @@
-Huyền_Speaking_1-100
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Luyện 100 Từ Vựng IELTS - Red Edition Pro</title>
+    <title>120 Collocations - 3 Phần</title>
     <style>
         :root {
             --primary-color: #d32f2f;
@@ -32,7 +32,7 @@ Huyền_Speaking_1-100
 
         .container {
             background-color: var(--card-bg);
-            padding: 30px;
+            padding: 25px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(211, 47, 47, 0.15);
             width: 100%;
@@ -43,17 +43,36 @@ Huyền_Speaking_1-100
             box-sizing: border-box;
         }
 
+        /* Deck Selector Styling */
+        .deck-selector-container {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        
+        .deck-select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid var(--primary-color);
+            background-color: white;
+            color: var(--text-color);
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+        }
+
         /* Header & Progress */
         .header-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .header-controls {
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
 
         .btn-icon {
@@ -64,8 +83,10 @@ Huyền_Speaking_1-100
             color: var(--primary-color);
             padding: 5px;
             transition: transform 0.2s;
+            border-radius: 5px;
         }
-        .btn-icon:hover { transform: scale(1.1); }
+        .btn-icon:hover { transform: scale(1.1); background-color: var(--accent-light); }
+        .btn-icon.active { background-color: #ffcdd2; border: 1px solid var(--primary-color); }
 
         .progress-bar {
             color: #ef5350;
@@ -74,23 +95,44 @@ Huyền_Speaking_1-100
             letter-spacing: 1px;
         }
 
-        /* Card Area */
+        /* Card Area - FIXED HEIGHT */
         .card {
-            min-height: 280px;
+            height: 420px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             position: relative;
+            overflow-y: auto;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #eee;
+            border-radius: 15px;
+            background: #fafafa;
         }
+        
+        .card::-webkit-scrollbar { width: 6px; }
+        .card::-webkit-scrollbar-thumb { background-color: rgba(211, 47, 47, 0.2); border-radius: 4px; }
 
         .vietnamese-text {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             color: #2c3e50;
             line-height: 1.4;
             word-wrap: break-word; 
+        }
+        
+        .pos-tag {
+            font-size: 14px; 
+            color: #666; 
+            margin-top: 5px; 
+            font-weight: normal;
+            font-style: italic;
+            background: #eee;
+            padding: 2px 8px;
+            border-radius: 10px;
+            display: inline-block;
         }
 
         .hidden-content {
@@ -99,18 +141,17 @@ Huyền_Speaking_1-100
             width: 100%;
         }
 
-        /* Layout cho hàng chứa từ tiếng Anh và nút loa */
         .english-row {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            margin: 5px 0; 
+            margin: 10px 0;
             flex-wrap: wrap;
         }
 
         .english-word {
-            font-size: 32px;
+            font-size: 28px;
             color: var(--primary-color);
             font-weight: 800;
             text-shadow: 1px 1px 0px rgba(0,0,0,0.05);
@@ -118,25 +159,23 @@ Huyền_Speaking_1-100
             word-break: break-word; 
         }
 
-        /* Style cho phiên âm IPA */
         .ipa-text {
             font-family: 'Lucida Sans Unicode', 'Arial Unicode MS', sans-serif;
-            font-size: 18px;
+            font-size: 16px;
             color: #757575;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             font-weight: 400;
         }
 
-        /* Nút nghe lại âm thanh */
         .btn-audio-replay {
             background: white;
             border: 2px solid var(--primary-color);
             color: var(--primary-color);
-            width: 40px; 
-            height: 40px;
+            width: 36px; 
+            height: 36px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 20px;
+            font-size: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -150,37 +189,22 @@ Huyền_Speaking_1-100
             transform: scale(1.1);
         }
 
-        .part-of-speech {
-            font-style: italic;
-            color: #c62828;
-            margin-bottom: 5px;
-            font-size: 14px;
-            background: var(--accent-light);
-            padding: 5px 12px;
-            border-radius: 15px;
-            display: inline-block;
-            border: 1px solid #ffcdd2;
-        }
-
-        /* FIX: Ensure example box style is present */
         .example-box {
-            font-size: 16px;
+            font-size: 15px;
             color: #4b5563;
-            margin-top: 15px;
-            padding: 15px;
-            background-color: #fff5f5;
+            margin-top: 10px;
+            padding: 12px;
+            background-color: #fff;
             border-left: 4px solid var(--primary-color);
             border-radius: 0 8px 8px 0;
             text-align: left;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             line-height: 1.5;
-            display: none; /* Hidden by default */
         }
 
-        /* Buttons */
         .btn {
             border: none;
-            padding: 14px 20px; 
+            padding: 12px 20px; 
             font-size: 16px;
             font-weight: 600;
             border-radius: 50px;
@@ -202,11 +226,10 @@ Huyền_Speaking_1-100
             font-size: 18px;
         }
 
-        /* Navigation Row */
         .nav-row {
             display: flex;
             justify-content: space-between;
-            margin-top: 25px;
+            margin-top: 20px;
             gap: 15px;
         }
 
@@ -214,17 +237,16 @@ Huyền_Speaking_1-100
             background-color: white;
             color: var(--primary-color);
             border: 2px solid var(--primary-color);
-            width: 55px; 
-            height: 55px;
+            width: 50px; 
+            height: 50px;
             border-radius: 50%;
-            font-size: 22px;
+            font-size: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 0;
         }
 
-        /* Review Status Buttons */
         .review-actions {
             display: flex;
             gap: 10px;
@@ -248,11 +270,11 @@ Huyền_Speaking_1-100
         .status-learning { color: var(--warning-color); background: #fff3e0; border: 1px solid #ffe0b2; }
 
         .status-msg {
-            font-size: 13px;
+            font-size: 12px;
             margin-top: 10px;
             color: #e53935;
             font-style: italic;
-            height: 20px;
+            height: 15px;
         }
 
         /* Modal Global */
@@ -369,16 +391,14 @@ Huyền_Speaking_1-100
 
         /* --- RESPONSIVE MOBILE CONFIGURATION --- */
         @media (max-width: 480px) {
-            .container {
-                padding: 20px;
-            }
+            .container { padding: 15px; }
             .vietnamese-text { font-size: 20px; }
-            .english-word { font-size: 26px; }
-            .card { min-height: 240px; }
+            .english-word { font-size: 24px; }
+            .card { height: 400px; }
             .btn { font-size: 15px; padding: 12px; }
             .btn-nav { width: 45px; height: 45px; font-size: 18px; }
-            .header-controls { gap: 8px; }
-            .btn-icon { font-size: 22px; }
+            .header-controls { gap: 5px; }
+            .btn-icon { font-size: 20px; padding: 4px; }
         }
 
         @keyframes fadeIn {
@@ -390,14 +410,24 @@ Huyền_Speaking_1-100
 <body>
 
 <div class="container">
+    <!-- Deck Selector -->
+    <div class="deck-selector-container">
+        <select id="deck-select" class="deck-select" onchange="changeDeck()">
+            <option value="0">Phần 1: Từ 1 - 50</option>
+            <option value="1">Phần 2: Từ 51 - 100</option>
+            <option value="2">Phần 3: Từ 101 - 120</option>
+        </select>
+    </div>
+
     <div class="header-row">
         <div class="header-controls">
             <button class="btn-icon" onclick="toggleList()" title="Danh sách từ">☰</button>
             <button class="btn-icon" onclick="toggleStats()" title="Thống kê">📊</button>
             <button class="btn-icon" onclick="toggleSettings()" title="Cài đặt âm thanh">⚙️</button>
+            <button class="btn-icon" id="btn-review" onclick="toggleReviewMode()" title="Ôn tập từ chưa thuộc">🧠</button>
             <button class="btn-icon" onclick="shuffleVocabulary()" title="Đảo thứ tự">🔀</button>
         </div>
-        <div id="progress" class="progress-bar">CÂU 1 / 100</div>
+        <div id="progress" class="progress-bar">CÂU 1 / 50</div>
     </div>
 
     <!-- Status Badge -->
@@ -406,13 +436,11 @@ Huyền_Speaking_1-100
     <div class="card">
         <!-- Phần câu hỏi Tiếng Việt -->
         <div id="question-area">
-            <div class="vietnamese-text" id="vn-text">Đang tải dữ liệu...</div>
+            <div class="vietnamese-text" id="vn-text"></div>
         </div>
 
         <!-- Phần đáp án (Ẩn) -->
         <div id="answer-area" class="hidden-content">
-            <div class="part-of-speech" id="pos-text"></div>
-            
             <!-- Hàng chứa từ và loa -->
             <div class="english-row">
                 <div class="english-word" id="en-text"></div>
@@ -422,7 +450,6 @@ Huyền_Speaking_1-100
             <!-- Phiên âm IPA -->
             <div class="ipa-text" id="ipa-text"></div>
 
-            <!-- FIX: Thêm lại div example-text để hiển thị ví dụ -->
             <div class="example-box" id="example-text"></div>
         </div>
     </div>
@@ -451,7 +478,7 @@ Huyền_Speaking_1-100
 <div id="list-modal" class="modal-overlay">
     <div class="modal-content">
         <div class="modal-header">
-            <h3 style="margin:0; color:var(--primary-color)">Danh Sách 100 Từ</h3>
+            <h3 style="margin:0; color:var(--primary-color)" id="list-title">Danh Sách</h3>
             <button onclick="toggleList()" style="border:none; background:none; font-size:24px; cursor:pointer;">&times;</button>
         </div>
         <div class="list-container" id="vocab-list-content"></div>
@@ -462,7 +489,7 @@ Huyền_Speaking_1-100
 <div id="stats-modal" class="modal-overlay">
     <div class="modal-content">
         <div class="modal-header">
-            <h3 style="margin:0; color:var(--primary-color)">Thống Kê Học Tập</h3>
+            <h3 style="margin:0; color:var(--primary-color)">Thống Kê (Phần Hiện Tại)</h3>
             <button onclick="toggleStats()" style="border:none; background:none; font-size:24px; cursor:pointer;">&times;</button>
         </div>
         
@@ -518,133 +545,162 @@ Huyền_Speaking_1-100
 </div>
 
 <script>
-    // === DỮ LIỆU TỪ VỰNG 100 CÂU ===
-    const initialVocabulary = [
-        // --- 1. WORK & STUDY ---
-        { en: "Major in", vi: "Chuyên ngành về...", ipa: "/ˈmeɪdʒər ɪn/", pos: "Verb Phrase", ex: "I decided to major in Marketing to understand consumer behavior." },
-        { en: "Prestigious university", vi: "Trường đại học danh tiếng", ipa: "/prɛˈstɪdʒəs ˌjuːnɪˈvɜːrsəti/", pos: "Noun Phrase", ex: "Graduating from a prestigious university can open many doors." },
-        { en: "Pursue a career in", vi: "Theo đuổi sự nghiệp trong lĩnh vực...", ipa: "/pərˈsuː ə kəˈrɪər ɪn/", pos: "Verb Phrase", ex: "She wants to pursue a career in digital journalism." },
-        { en: "Land a job", vi: "Kiếm được công việc", ipa: "/lænd ə dʒɒb/", pos: "Verb Phrase", ex: "He managed to land a job at Google right after graduation." },
-        { en: "9-to-5 job", vi: "Công việc hành chính", ipa: "/ˌnaɪn.təˈfaɪv dʒɒb/", pos: "Noun Phrase", ex: "I prefer a stable 9-to-5 job over freelancing." },
-        { en: "Full-time / Part-time", vi: "Toàn thời gian / Bán thời gian", ipa: "/ˌfʊlˈtaɪm / ˌpɑːrtˈtaɪm/", pos: "Adjective", ex: "Students often find part-time jobs to cover their living expenses." },
-        { en: "Work environment", vi: "Môi trường làm việc", ipa: "/wɜːrk ɪnˈvaɪrənmənt/", pos: "Noun Phrase", ex: "A toxic work environment significantly affects employee productivity." },
-        { en: "Colleagues / Coworkers", vi: "Đồng nghiệp", ipa: "/ˈkɒliːɡz / ˈkoʊˌwɜːrkərz/", pos: "Noun", ex: "My colleagues are very friendly and always willing to help." },
-        { en: "Supportive", vi: "Hỗ trợ, giúp đỡ nhau", ipa: "/səˈpɔːrtɪv/", pos: "Adjective", ex: "The teachers at this school are very supportive of their students." },
-        { en: "State-of-the-art facilities", vi: "Cơ sở vật chất hiện đại", ipa: "/ˌsteɪt.əv.ðiˈɑːrt fəˈsɪlətiz/", pos: "Noun Phrase", ex: "The research lab is equipped with state-of-the-art facilities." },
-        { en: "Heavy workload", vi: "Khối lượng công việc lớn", ipa: "/ˈhɛvi ˈwɜːrkloʊd/", pos: "Noun Phrase", ex: "I am dealing with a heavy workload this quarter." },
-        { en: "Meet a deadline", vi: "Kịp hạn chót", ipa: "/miːt ə ˈdɛdlaɪn/", pos: "Verb Phrase", ex: "We must work overtime to meet the deadline." },
-        { en: "Work under pressure", vi: "Làm việc dưới áp lực", ipa: "/wɜːrk ˈʌndər ˈprɛʃər/", pos: "Verb Phrase", ex: "Being able to work under pressure is a required skill for this job." },
-        { en: "Hectic schedule", vi: "Lịch trình bận rộn", ipa: "/ˈhɛktɪk ˈʃɛdjuːl/", pos: "Noun Phrase", ex: "Despite his hectic schedule, he always finds time for his family." },
-        { en: "Up to my ears in work", vi: "Bận ngập đầu", ipa: "/ʌp tu maɪ ɪərz ɪn wɜːrk/", pos: "Idiom", ex: "I can't go out tonight, I'm up to my ears in work." },
-        { en: "Burn the midnight oil", vi: "Thức khuya làm việc/học bài", ipa: "/bɜːrn ðə ˈmɪdnaɪt ɔɪl/", pos: "Idiom", ex: "She burnt the midnight oil to finish her thesis." },
-        { en: "Pass with flying colors", vi: "Đậu điểm cao", ipa: "/pæs wɪð ˈflaɪɪŋ ˈkʌlərz/", pos: "Idiom", ex: "He prepared well and passed the exam with flying colors." },
-        { en: "Challenging but rewarding", vi: "Thử thách nhưng xứng đáng", ipa: "/ˈtʃælɪndʒɪŋ bʌt rɪˈwɔːrdɪŋ/", pos: "Adjective Phrase", ex: "Teaching children is challenging but rewarding." },
-        { en: "Broaden my horizons", vi: "Mở rộng tầm mắt/kiến thức", ipa: "/ˈbrɔːdn maɪ həˈraɪzənz/", pos: "Verb Phrase", ex: "Traveling to new countries helps broaden my horizons." },
-        { en: "Practical experience", vi: "Kinh nghiệm thực tế", ipa: "/ˈpræktɪkl ɪkˈspɪəriəns/", pos: "Noun Phrase", ex: "Internships provide students with valuable practical experience." },
-        { en: "Lucrative income", vi: "Thu nhập cao/hậu hĩnh", ipa: "/ˈluːkrətɪv ˈɪnkʌm/", pos: "Noun Phrase", ex: "The IT industry offers a very lucrative income." },
-        { en: "Make a living", vi: "Kiếm sống", ipa: "/meɪk ə ˈlɪvɪŋ/", pos: "Verb Phrase", ex: "It's becoming harder to make a living as an artist." },
-        { en: "Cover my bills", vi: "Trang trải chi phí sinh hoạt", ipa: "/ˈkʌvər maɪ bɪlz/", pos: "Verb Phrase", ex: "I need a second job to cover my bills." },
-        { en: "Promotion opportunities", vi: "Cơ hội thăng tiến", ipa: "/prəˈmoʊʃn ˌɒpərˈtuːnətiz/", pos: "Noun Phrase", ex: "This company offers great promotion opportunities for hard workers." },
-        { en: "Get promoted", vi: "Được thăng chức", ipa: "/ɡɛt prəˈmoʊtɪd/", pos: "Verb Phrase", ex: "She got promoted to Senior Manager last month." },
-        { en: "Soft skills", vi: "Kỹ năng mềm", ipa: "/sɒft skɪlz/", pos: "Noun Phrase", ex: "Communication and teamwork are essential soft skills." },
-        { en: "Teamwork spirit", vi: "Tinh thần đồng đội", ipa: "/ˈtiːmwɜːrk ˈspɪrɪt/", pos: "Noun Phrase", ex: "The manager values strong teamwork spirit in the office." },
-        { en: "Job satisfaction", vi: "Sự hài lòng trong công việc", ipa: "/dʒɒb ˌsætɪsˈfækʃn/", pos: "Noun Phrase", ex: "For me, job satisfaction is more important than a high salary." },
-        { en: "Stable job", vi: "Công việc ổn định", ipa: "/ˈsteɪbl dʒɒb/", pos: "Noun Phrase", ex: "My parents want me to have a stable job in the government." },
-        { en: "Gap year", vi: "Năm nghỉ phép để trải nghiệm", ipa: "/ɡæp jɪər/", pos: "Noun", ex: "I took a gap year to travel across Europe before starting university." },
+    // === DỮ LIỆU TỔNG HỢP 120 TỪ ===
+    const allVocabulary = [
+        // PART 1 (1-50)
+        { en: "Major in [Subject]", vi: "Chuyên ngành về...", ipa: "/ˈmeɪ.dʒər ɪn/", pos: "v. phrase", ex: "I decided to major in Marketing." },
+        { en: "Prestigious university", vi: "Trường đại học danh tiếng", ipa: "/presˈtɪdʒ.əs ˌjuː.nɪˈvɜː.sə.ti/", pos: "n. phrase", ex: "He graduated from a prestigious university." },
+        { en: "Pursue a career in", vi: "Theo đuổi sự nghiệp trong lĩnh vực...", ipa: "/pəˈsjuː ə kəˈrɪər ɪn/", pos: "v. phrase", ex: "She wants to pursue a career in medicine." },
+        { en: "Land a job", vi: "Kiếm được công việc", ipa: "/lænd ə dʒɒb/", pos: "v. phrase", ex: "He managed to land a job at Google." },
+        { en: "9-to-5 job", vi: "Công việc hành chính", ipa: "/ˌnaɪn.təˈfaɪv dʒɒb/", pos: "n. phrase", ex: "I prefer a stable 9-to-5 job." },
+        { en: "Full-time / Part-time", vi: "Toàn thời gian / Bán thời gian", ipa: "/ˌfʊlˈtaɪm/ - /ˌpɑːtˈtaɪm/", pos: "adj/adv", ex: "Students often work part-time." },
+        { en: "Work environment", vi: "Môi trường làm việc", ipa: "/ˈwɜːk ɪnˌvaɪ.rən.mənt/", pos: "n. phrase", ex: "A good work environment is important." },
+        { en: "Colleague / Coworker", vi: "Đồng nghiệp", ipa: "/ˈkɒl.iːɡ/ - /ˌkəʊˈwɜː.kər/", pos: "n", ex: "My colleagues are very friendly." },
+        { en: "Supportive", vi: "Hỗ trợ, giúp đỡ nhau", ipa: "/səˈpɔː.tɪv/", pos: "adj", ex: "The team is very supportive." },
+        { en: "State-of-the-art facilities", vi: "Cơ sở vật chất hiện đại", ipa: "/ˌsteɪt.əv.ðiˈɑːt fəˈsɪl.ə.tiz/", pos: "n. phrase", ex: "The lab has state-of-the-art facilities." },
+        { en: "Heavy workload", vi: "Khối lượng công việc lớn", ipa: "/ˈhev.i ˈwɜːk.ləʊd/", pos: "n. phrase", ex: "I have a heavy workload this week." },
+        { en: "Meet a deadline", vi: "Kịp hạn chót", ipa: "/miːt ə ˈded.laɪn/", pos: "v. phrase", ex: "We must work hard to meet the deadline." },
+        { en: "Work under pressure", vi: "Làm việc dưới áp lực", ipa: "/wɜːk ˈʌn.dər ˈpreʃ.ər/", pos: "v. phrase", ex: "Can you work under pressure?" },
+        { en: "Hectic schedule", vi: "Lịch trình bận rộn", ipa: "/ˈhek.tɪk ˈʃedʒ.uːl/", pos: "n. phrase", ex: "Despite his hectic schedule, he exercises daily." },
+        { en: "Up to my ears in work", vi: "Bận ngập đầu", ipa: "/ʌp tu maɪ ɪəz ɪn wɜːk/", pos: "idiom", ex: "I'm up to my ears in work right now." },
+        { en: "Burn the midnight oil", vi: "Thức khuya làm việc/học bài", ipa: "/bɜːn ðə ˈmɪd.naɪt ɔɪl/", pos: "idiom", ex: "She burnt the midnight oil to finish the essay." },
+        { en: "Pass with flying colors", vi: "Đậu điểm cao (thi cử)", ipa: "/pɑːs wɪð ˈflaɪ.ɪŋ ˈkʌl.əz/", pos: "idiom", ex: "He passed the exam with flying colors." },
+        { en: "Challenging but rewarding", vi: "Thử thách nhưng xứng đáng", ipa: "/ˈtʃæl.ɪn.dʒɪŋ bʌt rɪˈwɔː.dɪŋ/", pos: "adj. phrase", ex: "Teaching is challenging but rewarding." },
+        { en: "Broaden my horizons", vi: "Mở rộng tầm mắt/kiến thức", ipa: "/ˈbrɔː.dən maɪ həˈraɪ.zənz/", pos: "v. phrase", ex: "Travel broadens my horizons." },
+        { en: "Practical experience", vi: "Kinh nghiệm thực tế", ipa: "/ˈpræk.tɪ.kəl ɪkˈspɪə.ri.əns/", pos: "n. phrase", ex: "Internships provide practical experience." },
+        { en: "Lucrative income", vi: "Thu nhập cao/hậu hĩnh", ipa: "/ˈluː.krə.tɪv ˈɪn.kʌm/", pos: "n. phrase", ex: "IT offers a lucrative income." },
+        { en: "Make a living", vi: "Kiếm sống", ipa: "/meɪk ə ˈlɪv.ɪŋ/", pos: "v. phrase", ex: "It's hard to make a living as an artist." },
+        { en: "Cover my bills", vi: "Trang trải chi phí sinh hoạt", ipa: "/ˈkʌv.ər maɪ bɪlz/", pos: "v. phrase", ex: "I need a job to cover my bills." },
+        { en: "Promotion opportunities", vi: "Cơ hội thăng tiến", ipa: "/prəˈməʊ.ʃən ˌɒp.əˈtjuː.nə.tiz/", pos: "n. phrase", ex: "The company offers good promotion opportunities." },
+        { en: "Get promoted", vi: "Được thăng chức", ipa: "/ɡet prəˈməʊ.tɪd/", pos: "v. phrase", ex: "She got promoted last month." },
+        { en: "Soft skills", vi: "Kỹ năng mềm", ipa: "/sɒft skɪlz/", pos: "n. phrase", ex: "Soft skills are essential for teamwork." },
+        { en: "Teamwork spirit", vi: "Tinh thần đồng đội", ipa: "/ˈtiːm.wɜːk ˈspɪr.ɪt/", pos: "n. phrase", ex: "We value teamwork spirit." },
+        { en: "Job satisfaction", vi: "Sự hài lòng trong công việc", ipa: "/dʒɒb ˌsæt.ɪsˈfæk.ʃən/", pos: "n. phrase", ex: "Job satisfaction is important." },
+        { en: "Stable job", vi: "Công việc ổn định", ipa: "/ˈsteɪ.bəl dʒɒb/", pos: "n. phrase", ex: "My parents want me to have a stable job." },
+        { en: "Gap year", vi: "Năm nghỉ phép (trải nghiệm)", ipa: "/ɡæp jɪər/", pos: "n. phrase", ex: "I took a gap year to travel." },
+        { en: "Located in / Situated in", vi: "Nằm ở...", ipa: "/ləʊˈkeɪ.tɪd ɪn/", pos: "adj. phrase", ex: "The hotel is situated in the center." },
+        { en: "Coastal city", vi: "Thành phố biển", ipa: "/ˈkəʊ.stəl ˈsɪt.i/", pos: "n. phrase", ex: "Da Nang is a beautiful coastal city." },
+        { en: "Mountainous area", vi: "Khu vực miền núi", ipa: "/ˈmaʊn.tɪ.nəs ˈeə.ri.ə/", pos: "n. phrase", ex: "They live in a mountainous area." },
+        { en: "The suburbs / Outskirts", vi: "Vùng ngoại ô", ipa: "/ˈsʌb.ɜːbz/", pos: "n", ex: "We moved to the suburbs." },
+        { en: "Heart of the city", vi: "Trung tâm thành phố", ipa: "/hɑːt əv ðə ˈsɪt.i/", pos: "n. phrase", ex: "My office is in the heart of the city." },
+        { en: "Industrial zone", vi: "Khu công nghiệp", ipa: "/ɪnˈdʌs.tri.əl zəʊn/", pos: "n. phrase", ex: "The factory is in an industrial zone." },
+        { en: "Tourist attraction", vi: "Điểm thu hút du lịch", ipa: "/ˈtʊə.rɪst əˈtræk.ʃən/", pos: "n. phrase", ex: "This museum is a major tourist attraction." },
+        { en: "Picturesque landscapes", vi: "Phong cảnh đẹp như tranh", ipa: "/ˌpɪk.tʃərˈesk ˈlænd.skeɪps/", pos: "n. phrase", ex: "The region is known for picturesque landscapes." },
+        { en: "Breathtaking view", vi: "Cảnh đẹp nín thở", ipa: "/ˈbreθˌteɪ.kɪŋ vjuː/", pos: "n. phrase", ex: "The room has a breathtaking view." },
+        { en: "Historical sites", vi: "Di tích lịch sử", ipa: "/hɪˈstɒr.ɪ.kəl saɪts/", pos: "n. phrase", ex: "We visited many historical sites." },
+        { en: "Pace of life", vi: "Nhịp sống", ipa: "/peɪs əv laɪf/", pos: "n. phrase", ex: "I enjoy the slow pace of life here." },
+        { en: "Hustle and bustle", vi: "Sự hối hả nhộn nhịp", ipa: "/ˈhʌs.əl ənd ˈbʌs.əl/", pos: "idiom", ex: "I escaped the hustle and bustle of the city." },
+        { en: "Tranquil / Peaceful", vi: "Yên bình", ipa: "/ˈtræŋ.kwɪl/", pos: "adj", ex: "The village is very tranquil." },
+        { en: "Fresh air", vi: "Không khí trong lành", ipa: "/freʃ eər/", pos: "n. phrase", ex: "I love the fresh air in the morning." },
+        { en: "Polluted", vi: "Ô nhiễm", ipa: "/pəˈluː.tɪd/", pos: "adj", ex: "The river is heavily polluted." },
+        { en: "Traffic congestion", vi: "Tắc đường", ipa: "/ˈtræf.ɪk kənˈdʒes.tʃən/", pos: "n. phrase", ex: "Traffic congestion is bad during rush hour." },
+        { en: "Commute", vi: "Việc đi lại (đi làm)", ipa: "/kəˈmjuːt/", pos: "n/v", ex: "My daily commute takes an hour." },
+        { en: "Crowded / Packed", vi: "Đông đúc", ipa: "/ˈkraʊ.dɪd/", pos: "adj", ex: "The bus was crowded." },
+        { en: "Vibrant", vi: "Sôi động, đầy sức sống", ipa: "/ˈvaɪ.brənt/", pos: "adj", ex: "The city has a vibrant nightlife." },
+        { en: "Dull / Boring", vi: "Nhàm chán", ipa: "/dʌl/", pos: "adj", ex: "Life here can be dull." },
+        
+        // PART 2 (51-100)
+        { en: "Hospitable", vi: "Hiếu khách", ipa: "/hɒsˈpɪt.ə.bəl/", pos: "adj", ex: "The locals are very hospitable." },
+        { en: "Friendly and welcoming", vi: "Thân thiện và chào đón", ipa: "/ˈfrend.li ənd ˈwel.kəm.ɪŋ/", pos: "adj. phrase", ex: "The staff were friendly and welcoming." },
+        { en: "Sense of community", vi: "Tinh thần cộng đồng", ipa: "/sens əv kəˈmjuː.nə.ti/", pos: "n. phrase", ex: "There is a strong sense of community." },
+        { en: "Local delicacies", vi: "Đặc sản địa phương", ipa: "/ˈləʊ.kəl ˈdel.ɪ.kə.siz/", pos: "n. phrase", ex: "Try the local delicacies." },
+        { en: "Street food", vi: "Đồ ăn đường phố", ipa: "/striːt fuːd/", pos: "n. phrase", ex: "Street food here is delicious." },
+        { en: "Amenities", vi: "Các tiện ích", ipa: "/əˈmiː.nə.tiz/", pos: "n", ex: "The hotel has excellent amenities." },
+        { en: "Entertainment center", vi: "Khu vui chơi giải trí", ipa: "/en.təˈteɪn.mənt ˈsen.tər/", pos: "n. phrase", ex: "Kids love the entertainment center." },
+        { en: "Public transport system", vi: "Hệ thống giao thông công cộng", ipa: "/ˈpʌb.lɪk ˈtræn.spɔːt ˈsɪs.təm/", pos: "n. phrase", ex: "The public transport system is efficient." },
+        { en: "Shopping mall", vi: "Trung tâm thương mại", ipa: "/ˈʃɒp.ɪŋ mɔːl/", pos: "n. phrase", ex: "We went to the shopping mall." },
+        { en: "Undergo dramatic changes", vi: "Trải qua thay đổi mạnh mẽ", ipa: "/ˌʌn.dəˈɡəʊ drəˈmæt.ɪk ˈtʃeɪn.dʒɪz/", pos: "v. phrase", ex: "The city underwent dramatic changes." },
+        { en: "Apartment block / Flat", vi: "Chung cư / Căn hộ", ipa: "/əˈpɑːt.mənt blɒk/", pos: "n. phrase", ex: "I live in a modern apartment block." },
+        { en: "Terraced house", vi: "Nhà phố (nhà liền kề)", ipa: "/ˈter.əst haʊs/", pos: "n. phrase", ex: "We bought a terraced house." },
+        { en: "Detached house", vi: "Nhà riêng biệt lập", ipa: "/dɪˈtætʃt haʊs/", pos: "n. phrase", ex: "A detached house offers privacy." },
+        { en: "Dormitory", vi: "Ký túc xá", ipa: "/ˈdɔː.mɪ.tər.i/", pos: "n", ex: "Students live in the dormitory." },
+        { en: "Rented accommodation", vi: "Nhà thuê", ipa: "/ˈren.tɪd əˌkɒm.əˈdeɪ.ʃən/", pos: "n. phrase", ex: "Rent accommodation is expensive." },
+        { en: "Residential area", vi: "Khu dân cư", ipa: "/ˌrez.ɪˈden.ʃəl ˈeə.ri.ə/", pos: "n. phrase", ex: "It is a quiet residential area." },
+        { en: "Convenient location", vi: "Vị trí thuận tiện", ipa: "/kənˈviː.ni.ənt ləʊˈkeɪ.ʃən/", pos: "n. phrase", ex: "The hotel has a convenient location." },
+        { en: "Within walking distance of", vi: "Gần (có thể đi bộ tới...)", ipa: "/wɪˈðɪn ˈwɔː.kɪŋ ˈdɪs.təns əv/", pos: "phrase", ex: "The beach is within walking distance." },
+        { en: "Prime location", vi: "Vị trí đắc địa", ipa: "/praɪm ləʊˈkeɪ.ʃən/", pos: "n. phrase", ex: "The shop is in a prime location." },
+        { en: "Overlook (a park/lake)", vi: "(Cửa sổ/Ban công) nhìn ra...", ipa: "/ˌəʊ.vəˈlʊk/", pos: "v", ex: "The window overlooks the park." },
+        { en: "Spacious", vi: "Rộng rãi", ipa: "/ˈspeɪ.ʃəs/", pos: "adj", ex: "The room is very spacious." },
+        { en: "Cramped", vi: "Chật chội", ipa: "/kræmpt/", pos: "adj", ex: "The small room felt cramped." },
+        { en: "Cozy", vi: "Ấm cúng", ipa: "/ˈkəʊ.zi/", pos: "adj", ex: "It's a small but cozy apartment." },
+        { en: "Airy", vi: "Thoáng khí", ipa: "/ˈeə.ri/", pos: "adj", ex: "Big windows make it airy." },
+        { en: "Stuffy", vi: "Bí bách", ipa: "/ˈstʌf.i/", pos: "adj", ex: "Open a window; it's stuffy here." },
+        { en: "Fully furnished", vi: "Đầy đủ nội thất", ipa: "/ˈfʊl.i ˈfɜː.nɪʃt/", pos: "adj. phrase", ex: "We rented a fully furnished flat." },
+        { en: "Modern appliances", vi: "Thiết bị hiện đại", ipa: "/ˈmɒd.ən əˈplaɪ.əns.ɪz/", pos: "n. phrase", ex: "The kitchen has modern appliances." },
+        { en: "Decorate", vi: "Trang trí", ipa: "/ˈdek.ə.reɪt/", pos: "v", ex: "We decorated the room for the party." },
+        { en: "Renovate", vi: "Sửa sang, nâng cấp nhà", ipa: "/ˈren.ə.veɪt/", pos: "v", ex: "They plan to renovate the old house." },
+        { en: "Balcony", vi: "Ban công", ipa: "/ˈbæl.kə.ni/", pos: "n", ex: "I have plants on the balcony." },
+        { en: "House chores", vi: "Việc nhà", ipa: "/haʊs tʃɔːrz/", pos: "n. phrase", ex: "We share the house chores." },
+        { en: "Do the laundry", vi: "Giặt đồ", ipa: "/duː ðə ˈlɔːn.dri/", pos: "v. phrase", ex: "I do the laundry on Sundays." },
+        { en: "Tidy up", vi: "Dọn dẹp", ipa: "/ˈtaɪ.di ʌp/", pos: "phrasal v.", ex: "Please tidy up your room." },
+        { en: "Family gathering", vi: "Tụ họp gia đình", ipa: "/ˈfæm.əl.i ˈɡæð.ər.ɪŋ/", pos: "n. phrase", ex: "We have a family gathering every holiday." },
+        { en: "Privacy", vi: "Sự riêng tư", ipa: "/ˈprɪv.ə.si/", pos: "n", ex: "I need some privacy." },
+        { en: "Unwind / Chill out", vi: "Thư giãn", ipa: "/ʌnˈwaɪnd/", pos: "phrasal v.", ex: "Listening to music helps me unwind." },
+        { en: "Housewarming party", vi: "Tiệc tân gia", ipa: "/ˈhaʊsˌwɔː.mɪŋ ˈpɑː.ti/", pos: "n. phrase", ex: "They threw a housewarming party." },
+        { en: "Get on well with neighbors", vi: "Hòa thuận với hàng xóm", ipa: "/ɡet ɒn wel wɪð ˈneɪ.bərz/", pos: "v. phrase", ex: "We get on well with our neighbors." },
+        { en: "Noisy neighbors", vi: "Hàng xóm ồn ào", ipa: "/ˈnɔɪ.zi ˈneɪ.bərz/", pos: "n. phrase", ex: "Noisy neighbors can be annoying." },
+        { en: "Feel at home", vi: "Cảm thấy thoải mái như ở nhà", ipa: "/fiːl ət həʊm/", pos: "idiom", ex: "Please sit down and feel at home." },
+        { en: "Actually / To be honest", vi: "Thật ra thì...", ipa: "/ˈæk.tʃu.ə.li/", pos: "adv", ex: "Actually, I don't like coffee." },
+        { en: "Generally speaking", vi: "Nói chung là", ipa: "/ˈdʒen.ər.əl.i ˈspiː.kɪŋ/", pos: "phrase", ex: "Generally speaking, it's a good movie." },
+        { en: "What I like most about X is", vi: "Điều tôi thích nhất ở X là...", ipa: "/wɒt aɪ laɪk məʊst.../", pos: "phrase", ex: "What I like most about this city is the food." },
+        { en: "I’m really keen on", vi: "Tôi rất thích...", ipa: "/aɪm ˈrɪə.li kiːn ɒn/", pos: "phrase", ex: "I'm really keen on photography." },
+        { en: "It allows me to", vi: "Nó cho phép tôi làm gì...", ipa: "/ɪt əˈlaʊz miː tu/", pos: "phrase", ex: "It allows me to express myself." },
+        { en: "Once in a blue moon", vi: "Hiếm khi", ipa: "/wʌns ɪn ə bluː muːn/", pos: "idiom", ex: "I go there once in a blue moon." },
+        { en: "Day in, day out", vi: "Ngày qua ngày", ipa: "/deɪ ɪn deɪ aʊt/", pos: "idiom", ex: "He works day in, day out." },
+        { en: "For the most part", vi: "Phần lớn là", ipa: "/fɔːr ðə məʊst pɑːt/", pos: "phrase", ex: "For the most part, I agree." },
+        { en: "On top of that", vi: "Thêm vào đó", ipa: "/ɒn tɒp əv ðæt/", pos: "phrase", ex: "On top of that, it's free." },
+        { en: "Last but not least", vi: "Cuối cùng nhưng không kém phần quan trọng", ipa: "/lɑːst bʌt nɒt liːst/", pos: "phrase", ex: "Last but not least, thank you for coming." },
 
-        // --- 2. HOMETOWN ---
-        { en: "Located in / Situated in", vi: "Nằm ở...", ipa: "/loʊˈkeɪtɪd ɪn / ˈsɪtʃueɪtɪd ɪn/", pos: "Verb Phrase", ex: "My hometown is situated in the coastal region of Vietnam." },
-        { en: "Coastal city", vi: "Thành phố biển", ipa: "/ˈkoʊstl ˈsɪti/", pos: "Noun Phrase", ex: "Da Nang is a beautiful coastal city famous for its beaches." },
-        { en: "Mountainous area", vi: "Khu vực miền núi", ipa: "/ˈmaʊntənəs ˈeriə/", pos: "Noun Phrase", ex: "Living in a mountainous area offers fresh air but travel can be difficult." },
-        { en: "The suburbs / Outskirts", vi: "Vùng ngoại ô", ipa: "/ðə ˈsʌbɜːrbz / ˈaʊtskɜːrts/", pos: "Noun", ex: "I live in the suburbs, so it takes me 30 minutes to drive to the city center." },
-        { en: "Heart of the city", vi: "Trung tâm thành phố", ipa: "/hɑːrt əv ðə ˈsɪti/", pos: "Noun Phrase", ex: "My apartment is right in the heart of the city." },
-        { en: "Industrial zone", vi: "Khu công nghiệp", ipa: "/ɪnˈdʌstriəl zoʊn/", pos: "Noun Phrase", ex: "There is a large industrial zone near my town providing jobs for locals." },
-        { en: "Tourist attraction", vi: "Điểm thu hút du lịch", ipa: "/ˈtʊərɪst əˈtrækʃn/", pos: "Noun Phrase", ex: "Ha Long Bay is a major tourist attraction in Vietnam." },
-        { en: "Picturesque landscapes", vi: "Phong cảnh đẹp như tranh", ipa: "/ˌpɪktʃəˈrɛsk ˈlændskeɪps/", pos: "Noun Phrase", ex: "Sapa is known for its picturesque landscapes and terraced rice fields." },
-        { en: "Breathtaking view", vi: "Cảnh đẹp nín thở", ipa: "/ˈbrɛθteɪkɪŋ vjuː/", pos: "Noun Phrase", ex: "The hotel room offers a breathtaking view of the ocean." },
-        { en: "Historical sites", vi: "Di tích lịch sử", ipa: "/hɪˈstɔːrɪkl saɪts/", pos: "Noun Phrase", ex: "Hue is famous for its many historical sites and ancient tombs." },
-        { en: "Pace of life", vi: "Nhịp sống", ipa: "/peɪs əv laɪf/", pos: "Noun Phrase", ex: "The pace of life in the countryside is much slower than in the city." },
-        { en: "Hustle and bustle", vi: "Sự hối hả nhộn nhịp", ipa: "/ˈhʌsl ənd ˈbʌsl/", pos: "Idiom/Noun", ex: "I enjoy the hustle and bustle of city life." },
-        { en: "Tranquil / Peaceful", vi: "Yên bình", ipa: "/ˈtræŋkwɪl / ˈpiːsfl/", pos: "Adjective", ex: "I love the tranquil atmosphere of my village." },
-        { en: "Fresh air", vi: "Không khí trong lành", ipa: "/frɛʃ ɛər/", pos: "Noun Phrase", ex: "We went to the park to breathe some fresh air." },
-        { en: "Polluted", vi: "Ô nhiễm", ipa: "/pəˈluːtɪd/", pos: "Adjective", ex: "The air in big cities is becoming heavily polluted." },
-        { en: "Traffic congestion", vi: "Tắc đường", ipa: "/ˈtræfɪk kənˈdʒɛstʃən/", pos: "Noun Phrase", ex: "Traffic congestion is a serious problem during rush hour." },
-        { en: "Commute", vi: "Việc đi lại (từ nhà đến chỗ làm)", ipa: "/kəˈmjuːt/", pos: "Noun/Verb", ex: "My daily commute takes about 45 minutes by bus." },
-        { en: "Crowded / Packed", vi: "Đông đúc", ipa: "/ˈkraʊdɪd / pækt/", pos: "Adjective", ex: "The streets are always crowded during festivals." },
-        { en: "Vibrant", vi: "Sôi động, đầy sức sống", ipa: "/ˈvaɪbrənt/", pos: "Adjective", ex: "Ho Chi Minh City has a vibrant nightlife." },
-        { en: "Dull / Boring", vi: "Nhàm chán", ipa: "/dʌl / ˈbɔːrɪŋ/", pos: "Adjective", ex: "Some people find life in the countryside a bit dull." },
-        { en: "Hospitable", vi: "Hiếu khách", ipa: "/hɒˈspɪtəbl/", pos: "Adjective", ex: "The local people are incredibly hospitable to tourists." },
-        { en: "Friendly and welcoming", vi: "Thân thiện và chào đón", ipa: "/ˈfrɛndli ənd ˈwɛlkəmɪŋ/", pos: "Adjective Phrase", ex: "My neighbors are very friendly and welcoming." },
-        { en: "Sense of community", vi: "Tinh thần cộng đồng", ipa: "/sɛns əv kəˈmjuːnəti/", pos: "Noun Phrase", ex: "There is a strong sense of community in this small town." },
-        { en: "Local delicacies", vi: "Đặc sản địa phương", ipa: "/ˈloʊkl ˈdɛlɪkəsiz/", pos: "Noun Phrase", ex: "You must try the local delicacies when you visit Hanoi." },
-        { en: "Street food", vi: "Đồ ăn đường phố", ipa: "/striːt fuːd/", pos: "Noun Phrase", ex: "Vietnam is famous for its delicious and cheap street food." },
-        { en: "Amenities", vi: "Các tiện ích", ipa: "/əˈmiːnətiz/", pos: "Noun", ex: "The apartment complex has excellent amenities like a pool and gym." },
-        { en: "Entertainment centers", vi: "Khu vui chơi giải trí", ipa: "/ˌɛntərˈteɪnmənt ˈsɛntərz/", pos: "Noun Phrase", ex: "Young people often hang out at entertainment centers on weekends." },
-        { en: "Public transport system", vi: "Hệ thống giao thông công cộng", ipa: "/ˈpʌblɪk ˈtrænspɔːrt ˈsɪstəm/", pos: "Noun Phrase", ex: "The city needs to improve its public transport system." },
-        { en: "Shopping mall", vi: "Trung tâm thương mại", ipa: "/ˈʃɒpɪŋ mɔːl/", pos: "Noun Phrase", ex: "We spent the whole afternoon at the shopping mall." },
-        { en: "Undergo dramatic changes", vi: "Trải qua thay đổi mạnh mẽ", ipa: "/ˌʌndərˈɡoʊ drəˈmætɪk ˈtʃeɪndʒɪz/", pos: "Verb Phrase", ex: "My hometown has undergone dramatic changes in the last decade." },
-
-        // --- 3. ACCOMMODATION ---
-        { en: "Apartment block / Flat", vi: "Chung cư/Căn hộ", ipa: "/əˈpɑːrtmənt blɒk / flæt/", pos: "Noun", ex: "I live in a modern apartment block near the river." },
-        { en: "Terraced house", vi: "Nhà phố (liền kề)", ipa: "/ˈtɛrəst haʊs/", pos: "Noun", ex: "Terraced houses are very common in the UK." },
-        { en: "Detached house", vi: "Nhà riêng biệt lập", ipa: "/dɪˈtætʃt haʊs/", pos: "Noun", ex: "A detached house offers more privacy than an apartment." },
-        { en: "Dormitory", vi: "Ký túc xá", ipa: "/ˈdɔːrmətɔːri/", pos: "Noun", ex: "Living in a dormitory is a great way to make friends at college." },
-        { en: "Rented accommodation", vi: "Nhà thuê", ipa: "/ˈrɛntɪd əˌkɒməˈdeɪʃn/", pos: "Noun Phrase", ex: "Students usually live in rented accommodation." },
-        { en: "Residential area", vi: "Khu dân cư", ipa: "/ˌrɛzɪˈdɛnʃl ˈeriə/", pos: "Noun Phrase", ex: "My house is in a quiet residential area." },
-        { en: "Convenient location", vi: "Vị trí thuận tiện", ipa: "/kənˈviːniənt loʊˈkeɪʃn/", pos: "Noun Phrase", ex: "The hotel has a convenient location near the subway station." },
-        { en: "Within walking distance of", vi: "Gần (có thể đi bộ tới)", ipa: "/wɪˈðɪn ˈwɔːkɪŋ ˈdɪstəns əv/", pos: "Prepositional Phrase", ex: "My office is within walking distance of my house." },
-        { en: "Prime location", vi: "Vị trí đắc địa", ipa: "/praɪm loʊˈkeɪʃn/", pos: "Noun Phrase", ex: "The shop is in a prime location on the main street." },
-        { en: "Overlook", vi: "Nhìn ra (công viên/hồ)", ipa: "/ˌoʊvərˈlʊk/", pos: "Verb", ex: "My bedroom window overlooks a beautiful park." },
-        { en: "Spacious", vi: "Rộng rãi", ipa: "/ˈspeɪʃəs/", pos: "Adjective", ex: "The living room is very spacious and bright." },
-        { en: "Cramped", vi: "Chật chội", ipa: "/kræmpt/", pos: "Adjective", ex: "The apartment is a bit cramped for a family of four." },
-        { en: "Cozy", vi: "Ấm cúng", ipa: "/ˈkoʊzi/", pos: "Adjective", ex: "I love my small, cozy bedroom." },
-        { en: "Airy", vi: "Thoáng khí", ipa: "/ˈeri/", pos: "Adjective", ex: "With large windows, the room feels very airy." },
-        { en: "Stuffy", vi: "Bí bách", ipa: "/ˈstʌfi/", pos: "Adjective", ex: "It gets very stuffy in here during the summer." },
-        { en: "Fully furnished", vi: "Đầy đủ nội thất", ipa: "/ˈfʊli ˈfɜːrnɪʃt/", pos: "Adjective", ex: "I rented a fully furnished apartment to save money on furniture." },
-        { en: "Modern appliances", vi: "Thiết bị hiện đại", ipa: "/ˈmɒdərn əˈplaɪənsɪz/", pos: "Noun Phrase", ex: "The kitchen is equipped with modern appliances." },
-        { en: "Decorate", vi: "Trang trí", ipa: "/ˈdɛkəreɪt/", pos: "Verb", ex: "I like to decorate my room with plants and paintings." },
-        { en: "Renovate", vi: "Sửa sang, nâng cấp", ipa: "/ˈrɛnəveɪt/", pos: "Verb", ex: "We plan to renovate the bathroom next year." },
-        { en: "Balcony", vi: "Ban công", ipa: "/ˈbælkəni/", pos: "Noun", ex: "I often drink coffee on the balcony in the morning." },
-        { en: "House chores", vi: "Việc nhà", ipa: "/haʊs tʃɔːrz/", pos: "Noun", ex: "My brother and I share the house chores." },
-        { en: "Do the laundry", vi: "Giặt đồ", ipa: "/duː ðə ˈlɔːndri/", pos: "Verb Phrase", ex: "I usually do the laundry on Sundays." },
-        { en: "Tidy up", vi: "Dọn dẹp", ipa: "/ˈtaɪdi ʌp/", pos: "Verb Phrase", ex: "Please tidy up your room before guests arrive." },
-        { en: "Family gathering", vi: "Tụ họp gia đình", ipa: "/ˈfæməli ˈɡæðərɪŋ/", pos: "Noun Phrase", ex: "We have a family gathering every Lunar New Year." },
-        { en: "Privacy", vi: "Sự riêng tư", ipa: "/ˈprɪvəsi/", pos: "Noun", ex: "Everyone needs some privacy now and then." },
-        { en: "Unwind / Chill out", vi: "Thư giãn", ipa: "/ˌʌnˈwaɪnd / tʃɪl aʊt/", pos: "Verb", ex: "Listening to music helps me unwind after work." },
-        { en: "Housewarming party", vi: "Tiệc tân gia", ipa: "/ˈhaʊswɔːrmɪŋ ˈpɑːrti/", pos: "Noun Phrase", ex: "They invited us to their housewarming party." },
-        { en: "Get on well with neighbors", vi: "Hòa thuận với hàng xóm", ipa: "/ɡɛt ɒn wɛl wɪð ˈneɪbərz/", pos: "Verb Phrase", ex: "Luckily, we get on very well with our neighbors." },
-        { en: "Noisy neighbors", vi: "Hàng xóm ồn ào", ipa: "/ˈnɔɪzi ˈneɪbərz/", pos: "Noun Phrase", ex: "Having noisy neighbors can be really annoying." },
-        { en: "Feel at home", vi: "Cảm thấy thoải mái như ở nhà", ipa: "/fiːl æt hoʊm/", pos: "Idiom", ex: "Please sit down and feel at home." },
-
-        // --- 4. LINKING WORDS ---
-        { en: "Actually / To be honest", vi: "Thật ra thì / Thành thật mà nói", ipa: "/ˈæktʃuəli / tuː bi ˈɒnɪst/", pos: "Adverb/Phrase", ex: "Actually, I haven't finished the report yet." },
-        { en: "Generally speaking", vi: "Nói chung là", ipa: "/ˈdʒɛnərəli ˈspiːkɪŋ/", pos: "Phrase", ex: "Generally speaking, the weather here is quite nice." },
-        { en: "What I like most about X is", vi: "Điều tôi thích nhất ở X là...", ipa: "/wɒt aɪ laɪk moʊst əˈbaʊt ... ɪz/", pos: "Phrase", ex: "What I like most about this job is the flexibility." },
-        { en: "I’m really keen on", vi: "Tôi rất thích...", ipa: "/aɪm ˈrɪəli kiːn ɒn/", pos: "Phrase", ex: "I’m really keen on playing football." },
-        { en: "It allows me to", vi: "Nó cho phép tôi làm gì...", ipa: "/ɪt əˈlaʊz miː tuː/", pos: "Phrase", ex: "This software allows me to work much faster." },
-        { en: "Once in a blue moon", vi: "Hiếm khi", ipa: "/wʌns ɪn ə bluː muːn/", pos: "Idiom", ex: "I go to the cinema once in a blue moon." },
-        { en: "Day in, day out", vi: "Ngày qua ngày", ipa: "/deɪ ɪn, deɪ aʊt/", pos: "Idiom", ex: "He does the same boring job day in, day out." },
-        { en: "For the most part", vi: "Phần lớn là", ipa: "/fɔːr ðə moʊst pɑːrt/", pos: "Phrase", ex: "For the most part, I agree with your opinion." },
-        { en: "On top of that", vi: "Thêm vào đó", ipa: "/ɒn tɒp əv ðæt/", pos: "Phrase", ex: "The job is interesting, and on top of that, the pay is good." },
-        { en: "Last but not least", vi: "Cuối cùng nhưng không kém phần quan trọng", ipa: "/læst bʌt nɒt liːst/", pos: "Phrase", ex: "And last but not least, I'd like to thank my parents." }
+        // PART 3 (101-120)
+        { en: "On a daily basis", vi: "Hàng ngày", ipa: "/ɒn ə ˈdeɪ.li ˈbeɪ.sɪs/", pos: "adv phrase", ex: "I exercise on a daily basis." },
+        { en: "From time to time", vi: "Thỉnh thoảng", ipa: "/frɒm taɪm tu taɪm/", pos: "adv phrase", ex: "I visit the park from time to time." },
+        { en: "Every now and then", vi: "Thỉnh thoảng", ipa: "/ˈev.ri naʊ ənd ðen/", pos: "adv phrase", ex: "We meet up every now and then." },
+        { en: "Frequently", vi: "Thường xuyên", ipa: "/ˈfriː.kwənt.li/", pos: "adv", ex: "She frequently visits the library." },
+        { en: "Hardly ever / Rarely", vi: "Hiếm khi", ipa: "/ˈhɑːd.li ˈev.ər/", pos: "adv", ex: "I hardly ever watch TV." },
+        { en: "Make a habit of", vi: "Tạo thói quen làm gì", ipa: "/meɪk ə ˈhæb.ɪt əv/", pos: "v phrase", ex: "Make a habit of reading daily." },
+        { en: "Get into the habit of", vi: "Bắt đầu thói quen gì", ipa: "/ɡet ˈɪn.tu ðə ˈhæb.ɪt əv/", pos: "v phrase", ex: "I got into the habit of jogging." },
+        { en: "Kick the bad habit", vi: "Từ bỏ thói quen xấu", ipa: "/kɪk ðə bæd ˈhæb.ɪt/", pos: "v phrase", ex: "He wants to kick the bad habit of smoking." },
+        { en: "Stick to a routine", vi: "Tuân thủ lịch trình/thói quen", ipa: "/stɪk tu ə ruːˈtiːn/", pos: "v phrase", ex: "Sticking to a routine helps productivity." },
+        { en: "Tend to", vi: "Có xu hướng", ipa: "/tend tu/", pos: "v phrase", ex: "I tend to wake up early." },
+        { en: "Without fail", vi: "Không bao giờ bỏ sót (đều đặn)", ipa: "/wɪˈðaʊt feɪl/", pos: "idiom", ex: "She arrives at 8 AM without fail." },
+        { en: "Early bird / Morning person", vi: "Người hay dậy sớm", ipa: "/ˈɜː.li bɜːd/", pos: "n phrase", ex: "I am an early bird." },
+        { en: "Wake up at the crack of dawn", vi: "Dậy khi tờ mờ sáng", ipa: "/weɪk ʌp æt ðə kræk əv dɔːn/", pos: "idiom", ex: "He wakes up at the crack of dawn to farm." },
+        { en: "Hit the snooze button", vi: "Bấm nút hoãn báo thức", ipa: "/hɪt ðə snuːz ˈbʌt.ən/", pos: "v phrase", ex: "I always hit the snooze button." },
+        { en: "Oversleep", vi: "Ngủ quên", ipa: "/ˌəʊ.vəˈsliːp/", pos: "v", ex: "Don't oversleep on exam day." },
+        { en: "Have a nutritious breakfast", vi: "Ăn bữa sáng dinh dưỡng", ipa: "/hæv ə njuːˈtrɪʃ.əs ˈbrek.fəst/", pos: "v phrase", ex: "Have a nutritious breakfast for energy." },
+        { en: "Skip breakfast", vi: "Bỏ bữa sáng", ipa: "/skɪp ˈbrek.fəst/", pos: "v phrase", ex: "Never skip breakfast." },
+        { en: "Grab a quick bite", vi: "Ăn vội cái gì đó", ipa: "/ɡræb ə kwɪk baɪt/", pos: "v phrase", ex: "Let's grab a quick bite before we go." },
+        { en: "Get ready for school", vi: "Chuẩn bị đi học", ipa: "/ɡet ˈred.i fɔː skuːl/", pos: "v phrase", ex: "I get ready for school at 7 AM." },
+        { en: "Rush out the door", vi: "Lao ra khỏi nhà", ipa: "/rʌʃ aʊt ðə dɔːr/", pos: "v phrase", ex: "He rushed out the door to catch the bus." }
     ];
 
-    let vocabularyList = initialVocabulary.map(item => ({...item, status: 'new'}));
-    
+    // Tạo mảng riêng cho từng phần để dễ quản lý (logic hiển thị sẽ lọc từ allVocabulary)
+    // Nhưng để đơn giản cho logic render, ta sẽ dùng slice từ allVocabulary
+    let currentDeckIndex = 0; // 0: 1-50, 1: 51-100, 2: 101-120
+    const decks = [
+        { start: 0, end: 50, name: "Phần 1: Từ 1 - 50" },
+        { start: 50, end: 100, name: "Phần 2: Từ 51 - 100" },
+        { start: 100, end: 120, name: "Phần 3: Từ 101 - 120" }
+    ];
+
+    // Init current list based on deck 0
+    let currentList = allVocabulary.slice(decks[0].start, decks[0].end).map(item => ({...item, status: 'new'}));
+    // Note: status needs to be persisted or reset on deck change? 
+    // Simple version: Reset status when changing deck (or keep separate state objects if complex)
+    // To keep it simple in this single file, we will re-generate the status map when switching decks, 
+    // effectively resetting progress for that session on deck switch.
+
+    let isReviewMode = false;
     let currentIndex = 0;
     let isRevealed = false;
     let availableVoices = [];
-    
-    // Global settings for audio
-    let selectedVoiceIndex = -1; // -1 means auto-detect
-    let readingRate = 0.7; // Default slow speed
+    let selectedVoiceIndex = -1;
+    let readingRate = 0.7;
 
-    // Elements
     const elements = {
         vnText: document.getElementById('vn-text'),
         enText: document.getElementById('en-text'),
-        ipaText: document.getElementById('ipa-text'), // New element for IPA
-        posText: document.getElementById('pos-text'),
+        ipaText: document.getElementById('ipa-text'),
         exText: document.getElementById('example-text'),
         answerArea: document.getElementById('answer-area'),
         btnReveal: document.getElementById('btn-reveal'),
@@ -662,29 +718,40 @@ Huyền_Speaking_1-100
         settingsModal: document.getElementById('settings-modal'),
         voiceSelect: document.getElementById('voice-select'),
         speedRange: document.getElementById('speed-range'),
-        speedDisplay: document.getElementById('speed-display')
+        speedDisplay: document.getElementById('speed-display'),
+        btnReview: document.getElementById('btn-review'),
+        deckSelect: document.getElementById('deck-select')
     };
 
-    // === SETUP AUDIO (PURE SYSTEM SPEECH) ===
+    // --- DECK LOGIC ---
+    function changeDeck() {
+        currentDeckIndex = parseInt(elements.deckSelect.value);
+        const range = decks[currentDeckIndex];
+        
+        // Reset state for new deck
+        currentList = allVocabulary.slice(range.start, range.end).map(item => ({...item, status: 'new'}));
+        currentIndex = 0;
+        isReviewMode = false;
+        elements.btnReview.classList.remove('active');
+        
+        loadCard(0);
+        elements.statusMsg.innerText = `Đã chuyển sang ${range.name}`;
+        setTimeout(() => elements.statusMsg.innerText = "", 2000);
+    }
+
+    // --- AUDIO ---
     function loadVoices() {
         availableVoices = window.speechSynthesis.getVoices();
-        
-        // Populate Dropdown
         elements.voiceSelect.innerHTML = '';
-        
-        // Option Mặc định
         const defaultOption = document.createElement('option');
         defaultOption.value = -1;
         defaultOption.text = "Tự động chọn (Tốt nhất)";
         elements.voiceSelect.appendChild(defaultOption);
-
         availableVoices.forEach((voice, index) => {
-            // Chỉ hiện các giọng có tiếng Anh để đỡ rối
             if(voice.lang.includes('en')) {
                 const option = document.createElement('option');
                 option.value = index;
                 option.text = `${voice.name} (${voice.lang})`;
-                // Đánh dấu nếu đang được chọn
                 if (index === selectedVoiceIndex) option.selected = true;
                 elements.voiceSelect.appendChild(option);
             }
@@ -694,111 +761,107 @@ Huyền_Speaking_1-100
     if (speechSynthesis.onvoiceschanged !== undefined) {
         speechSynthesis.onvoiceschanged = loadVoices;
     }
-    // Gọi lần đầu (đôi khi trình duyệt đã load xong rồi)
     setTimeout(loadVoices, 100);
 
     function playAudio(text) {
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(text);
         
-        // Xác định giọng đọc
         if (selectedVoiceIndex !== -1 && availableVoices[selectedVoiceIndex]) {
-            // Người dùng đã chọn giọng cụ thể
             utterance.voice = availableVoices[selectedVoiceIndex];
         } else {
-            // Tự động chọn (Ưu tiên Google / Premium / UK)
             let preferredVoice = availableVoices.find(voice => 
                 (voice.name.includes('Google') && voice.lang.includes('en')) || 
                 (voice.name.includes('Premium') && voice.lang.includes('en')) ||
                 (voice.name.includes('Samantha') && voice.lang.includes('en'))
             );
-
-            if (!preferredVoice) {
-                preferredVoice = availableVoices.find(voice => voice.lang === 'en-GB' || voice.lang === 'en_GB');
-            }
-            if (!preferredVoice) {
-                preferredVoice = availableVoices.find(voice => voice.lang.includes('en'));
-            }
-
+            if (!preferredVoice) preferredVoice = availableVoices.find(voice => voice.lang === 'en-GB' || voice.lang === 'en_GB');
+            if (!preferredVoice) preferredVoice = availableVoices.find(voice => voice.lang.includes('en'));
             if (preferredVoice) utterance.voice = preferredVoice;
         }
         
-        // Áp dụng tốc độ
         utterance.rate = readingRate; 
         utterance.pitch = 1.0;
         utterance.volume = 1.0;
-
         utterance.onerror = (e) => console.log('Speech error:', e);
         window.speechSynthesis.speak(utterance);
     }
 
-    // --- SETTINGS FUNCTIONS ---
     function toggleSettings() {
         const isHidden = elements.settingsModal.style.display === 'none' || elements.settingsModal.style.display === '';
-        if (isHidden) {
-            elements.settingsModal.style.display = 'flex';
-            // Refresh voice list in case it wasn't loaded
-            if(availableVoices.length === 0) loadVoices();
+        if (isHidden) { elements.settingsModal.style.display = 'flex'; if(availableVoices.length === 0) loadVoices(); } else { elements.settingsModal.style.display = 'none'; }
+    }
+
+    function updateVoiceSettings() { selectedVoiceIndex = parseInt(elements.voiceSelect.value); }
+    function updateSpeedSettings() { readingRate = parseFloat(elements.speedRange.value); elements.speedDisplay.innerText = readingRate; }
+    function testVoice() { playAudio("Hello, this is a test for English voice."); }
+
+    // --- MAIN LOGIC ---
+    function toggleReviewMode() {
+        if (isReviewMode) {
+            // Revert to full deck
+            const range = decks[currentDeckIndex];
+            // We need to preserve statuses. 
+            // In this simple implementation, currentList IS the state. 
+            // So if we were filtering, we need to go back to the full 'currentList' but that was filtered.
+            // Actually, best way is to keep 'currentList' as the Working List.
+            // But when switching modes, we filter.
+            // Let's reload the deck from the master source but we lose status.
+            // BETTER: We filter the current list for display but keep the main list in memory.
+            // For simplicity in this file: 
+            // We will just alert if 0 items. 
+            // If switching OFF review mode, we go back to showing all items in current deck range?
+            // Since we modified 'currentList' in place in previous code, let's fix that.
+            // We will reload the deck to get back all items, but we lose status.
+            // FIX: We won't support complex state persistence in this simple file. 
+            // Review mode will filter the CURRENT list. Exiting it will reset the deck.
+            alert("Chế độ ôn tập sẽ lọc danh sách hiện tại. Để quay lại, hãy chọn lại Phần trong menu.");
+            
+            const learningWords = currentList.filter(item => item.status === 'learning');
+            if (learningWords.length === 0) {
+                alert("Bạn chưa có từ nào 'Chưa thuộc' trong phần này!");
+                return;
+            }
+            currentList = learningWords;
+            isReviewMode = true;
+            currentIndex = 0;
+            loadCard(0);
+            elements.statusMsg.innerText = "📝 Đang ôn tập từ chưa thuộc";
+            elements.btnReview.classList.add('active');
         } else {
-            elements.settingsModal.style.display = 'none';
+             // Already entered, maybe button acts as toggle off?
+             // Since we overwrote currentList, we can't easily toggle back without losing status unless we stored it.
+             // We will reload the deck.
+             changeDeck(); // Reloads full deck
         }
     }
 
-    function updateVoiceSettings() {
-        selectedVoiceIndex = parseInt(elements.voiceSelect.value);
-        // Lưu ý: Không cần lưu localStorage vì đề bài không yêu cầu, 
-        // nhưng biến selectedVoiceIndex là toàn cục nên sẽ áp dụng cho mọi từ.
-    }
-
-    function updateSpeedSettings() {
-        readingRate = parseFloat(elements.speedRange.value);
-        elements.speedDisplay.innerText = readingRate;
-    }
-    
-    function testVoice() {
-        playAudio("Hello, this is a test for English voice.");
-    }
-
-    // --- OTHER LOGIC ---
     function shuffleVocabulary() {
-        for (let i = vocabularyList.length - 1; i > 0; i--) {
+        for (let i = currentList.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
-            [vocabularyList[i], vocabularyList[j]] = [vocabularyList[j], vocabularyList[i]];
+            [currentList[i], currentList[j]] = [currentList[j], currentList[i]];
         }
         currentIndex = 0;
         loadCard(0);
-        elements.statusMsg.innerText = "🔀 Đã đảo thứ tự từ vựng!";
+        elements.statusMsg.innerText = "🔀 Đã đảo thứ tự!";
         setTimeout(() => elements.statusMsg.innerText = "", 2000);
     }
 
     function loadCard(index) {
-        if (index < 0) currentIndex = vocabularyList.length - 1;
-        else if (index >= vocabularyList.length) currentIndex = 0;
+        if (currentList.length === 0) return;
+
+        if (index < 0) currentIndex = currentList.length - 1;
+        else if (index >= currentList.length) currentIndex = 0;
         else currentIndex = index;
 
-        const item = vocabularyList[currentIndex];
-
-        elements.vnText.innerText = item.vi;
+        const item = currentList[currentIndex];
+        
+        // Show Vietnamese + POS
+        elements.vnText.innerHTML = `${item.vi}<div class="pos-tag">${item.pos}</div>`;
+        
         elements.enText.innerText = item.en;
-        elements.posText.innerText = item.pos;
-        
-        // FIX: Check if exText element exists and if item has example data
-        if(elements.exText) {
-             if(item.ex) {
-                elements.exText.innerText = `Ví dụ: "${item.ex}"`;
-                elements.exText.style.display = 'block';
-            } else {
-                elements.exText.style.display = 'none';
-            }
-        }
-        
-        // Cập nhật IPA
-        if (item.ipa) {
-            elements.ipaText.innerText = item.ipa;
-            elements.ipaText.style.display = 'block';
-        } else {
-            elements.ipaText.style.display = 'none';
-        }
+        elements.ipaText.innerText = item.ipa;
+        elements.exText.innerText = `Ví dụ: "${item.ex}"`;
         
         elements.answerArea.style.display = 'none';
         elements.reviewActions.style.display = 'none';
@@ -807,9 +870,8 @@ Huyền_Speaking_1-100
         elements.btnReveal.innerText = "XEM ĐÁP ÁN";
         elements.statusMsg.innerText = "";
         
-        elements.progress.innerText = `CÂU ${currentIndex + 1} / ${vocabularyList.length}`;
+        elements.progress.innerText = `CÂU ${currentIndex + 1} / ${currentList.length}`;
         updateStatusBadge(item.status);
-        
         isRevealed = false;
     }
 
@@ -831,44 +893,42 @@ Huyền_Speaking_1-100
         isRevealed = true;
         elements.btnReveal.disabled = true;
         elements.answerArea.style.display = 'block';
-        playAudio(vocabularyList[currentIndex].en);
+        playAudio(currentList[currentIndex].en);
         elements.btnReveal.style.display = 'none'; 
         elements.reviewActions.style.display = 'flex'; 
     }
 
-    function playCurrentAudio() {
-        playAudio(vocabularyList[currentIndex].en);
-    }
+    function playCurrentAudio() { playAudio(currentList[currentIndex].en); }
 
     function markStatus(status) {
-        vocabularyList[currentIndex].status = status;
+        currentList[currentIndex].status = status;
         updateStatusBadge(status);
         setTimeout(() => { changeCard(1); }, 300);
     }
 
-    function changeCard(step) {
-        loadCard(currentIndex + step);
-    }
+    function changeCard(step) { loadCard(currentIndex + step); }
 
+    // --- MODALS ---
     function toggleList() {
         const isHidden = elements.listModal.style.display === 'none' || elements.listModal.style.display === '';
-        if (isHidden) {
-            renderList();
-            elements.listModal.style.display = 'flex';
-        } else {
-            elements.listModal.style.display = 'none';
-        }
+        if (isHidden) { renderList(); elements.listModal.style.display = 'flex'; } else { elements.listModal.style.display = 'none'; }
     }
 
     function renderList() {
         elements.listContent.innerHTML = '';
-        vocabularyList.forEach((item, index) => {
+        currentList.forEach((item, index) => {
             const div = document.createElement('div');
             div.className = `list-item ${index === currentIndex ? 'active' : ''}`;
             let statusIcon = '⚪';
             if (item.status === 'learned') statusIcon = '✅';
             if (item.status === 'learning') statusIcon = '🔸';
-            div.innerHTML = `<div style="display:flex; align-items:center;"><span style="margin-right:8px; font-size: 12px;">${statusIcon}</span><strong>${item.en}</strong></div><div style="font-size:12px; color:#666;">${index + 1}</div>`;
+            div.innerHTML = `
+                <div style="display:flex; align-items:center;">
+                    <span style="margin-right:8px; font-size: 12px;">${statusIcon}</span>
+                    <strong>${item.en}</strong>
+                </div>
+                <div style="font-size:12px; color:#666;">${index + 1}</div>
+            `;
             div.onclick = () => { currentIndex = index; loadCard(currentIndex); toggleList(); };
             elements.listContent.appendChild(div);
         });
@@ -880,35 +940,33 @@ Huyền_Speaking_1-100
     }
 
     function renderStats() {
-        const learnedCount = vocabularyList.filter(i => i.status === 'learned').length;
-        const learningCount = vocabularyList.filter(i => i.status === 'learning').length;
-        const newCount = vocabularyList.filter(i => i.status === 'new').length;
+        const learnedCount = currentList.filter(i => i.status === 'learned').length;
+        const learningCount = currentList.filter(i => i.status === 'learning').length;
+        const newCount = currentList.filter(i => i.status === 'new').length;
+        
         elements.statLearned.innerText = learnedCount;
         elements.statLearning.innerText = learningCount;
         elements.statNew.innerText = newCount;
-        let recommendItems = vocabularyList.map((item, index) => ({ ...item, originalIndex: index })).filter(i => i.status === 'learning');
+        
+        let recommendItems = currentList.filter(i => i.status === 'learning');
         elements.recommendList.innerHTML = '';
+        
         if (recommendItems.length === 0) {
-            const newItems = vocabularyList.map((item, index) => ({ ...item, originalIndex: index })).filter(i => i.status === 'new').slice(0, 5);
-            if (newItems.length > 0) {
-                elements.recommendList.innerHTML = '<div style="color:#777; font-style:italic; padding:10px;">Bạn đã thuộc hết các từ cần ôn. Hãy học từ mới:</div>';
-                newItems.forEach(item => createRecommendItem(item));
-            } else {
-                elements.recommendList.innerHTML = '<div style="color:green; padding:10px; text-align:center;">🎉 Tuyệt vời! Bạn đã thuộc hết toàn bộ danh sách.</div>';
-            }
+             elements.recommendList.innerHTML = '<div style="color:green; padding:10px; text-align:center;">Tuyệt vời! Không có từ nào cần ôn gấp trong phần này.</div>';
         } else {
-            recommendItems.forEach(item => createRecommendItem(item));
+            recommendItems.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'recommend-item';
+                div.innerHTML = `🔸 <strong>${item.en}</strong>`;
+                // Find original index in current list to jump to
+                const idx = currentList.indexOf(item);
+                div.onclick = () => { currentIndex = idx; loadCard(currentIndex); toggleStats(); };
+                elements.recommendList.appendChild(div);
+            });
         }
     }
 
-    function createRecommendItem(item) {
-        const div = document.createElement('div');
-        div.className = 'recommend-item';
-        div.innerHTML = `🔸 <strong>${item.en}</strong> <span style="font-size:12px; color:#999;">(${item.vi})</span>`;
-        div.onclick = () => { currentIndex = item.originalIndex; loadCard(currentIndex); toggleStats(); };
-        elements.recommendList.appendChild(div);
-    }
-
+    // Init
     loadCard(0);
 </script>
 
